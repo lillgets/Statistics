@@ -7,13 +7,15 @@
 <style>
   body { margin:0; background:#000; overflow:hidden; position:relative; font-family:'Arial', sans-serif; }
   canvas { display:block; }
-  #title { position:absolute; top:40px; left:50%; transform:translateX(-50%); color:#fff; font-size:48px; font-weight:bold; text-align:center; z-index:10; }
-  #subtitle { position:absolute; top:110px; left:50%; transform:translateX(-50%); color:#fff; font-size:24px; font-weight:normal; text-align:center; z-index:10; }
-  #footer { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); color:#fff; font-size:18px; text-align:center; z-index:10; }
+  #title { position:absolute; top:5%; left:50%; transform:translateX(-50%); color:#fff; font-size:48px; font-weight:bold; text-align:center; z-index:10; line-height:1.2; max-width:90%; word-wrap:break-word; }
+  #subtitle { position:absolute; top:15%; left:50%; transform:translateX(-50%); color:#fff; font-size:24px; font-weight:normal; text-align:center; z-index:10; line-height:1.2; max-width:90%; word-wrap:break-word; }
   @media (max-width:768px) {
-    #title { font-size:32px; top:20px; }
-    #subtitle { font-size:16px; top:70px; }
-    #footer { font-size:14px; }
+    #title { font-size:28px; top:8%; }
+    #subtitle { font-size:16px; top:18%; }
+  }
+  @media (max-width:480px) {
+    #title { font-size:22px; top:10%; }
+    #subtitle { font-size:14px; top:22%; }
   }
 </style>
 </head>
@@ -21,7 +23,6 @@
 <div id="title">Statistics মানে শৃংখলা</div>
 <div id="subtitle">১০ ঘণ্টার কাজ, ১০ সেকেন্ডে</div>
 <canvas id="solarCanvas"></canvas>
-<div id="footer">Developed by Muntazir Rashik</div>
 <script>
 const canvas = document.getElementById('solarCanvas');
 const ctx = canvas.getContext('2d');
