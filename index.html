@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Solar System</title>
+<style>
+  body { margin:0; background:#000; overflow:hidden; position:relative; font-family:'Arial', sans-serif; }
+  canvas { display:block; }
+  #title { position:absolute; top:40px; left:50%; transform:translateX(-50%); color:#fff; font-size:48px; font-weight:bold; text-align:center; z-index:10; }
+  #subtitle { position:absolute; top:110px; left:50%; transform:translateX(-50%); color:#fff; font-size:24px; font-weight:normal; text-align:center; z-index:10; }
+  #footer { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); color:#fff; font-size:18px; text-align:center; z-index:10; }
+  @media (max-width:768px) {
+    #title { font-size:32px; top:20px; }
+    #subtitle { font-size:16px; top:70px; }
+    #footer { font-size:14px; }
+  }
+</style>
+</head>
+<body>
+<div id="title">Statistics মানে শৃংখলা</div>
+<div id="subtitle">১০ ঘণ্টার কাজ, ১০ সেকেন্ডে</div>
+<canvas id="solarCanvas"></canvas>
+<div id="footer">Developed by Muntazir Rashik</div>
+<script>
+const canvas = document.getElementById('solarCanvas');
+const ctx = canvas.getContext('2d');
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const centerX = canvas.width/2;
+const centerY = canvas.height/2;
+const planets = [
+  {name:'Mercury', radius:10, dist:50, speed:0.04, angle:0, color:'#aaa'},
+  {name:'Venus', radius:14, dist:80, speed:0.015, angle:0, color:'#ffcc99'},
+  {name:'Earth', radius:16, dist:120, speed:0.01, angle:0, color:'#3399ff'},
+  {name:'Mars', radius:12, dist:160, speed:0.008, angle:0, color:'#ff6666'}
+];
+function drawSolarSystem(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Sun
+  ctx.beginPath(); ctx.arc(centerX,centerY,30,0,Math.PI*2); ctx.fillStyle='#ffdd00'; ctx.fill();
+  // Planets
+  planets.forEach(p=>{
+    p.angle += p.speed;
+    const x = centerX + p.dist*Math.cos(p.angle);
+    const y = centerY + p.dist*Math.sin(p.angle);
+    ctx.beginPath(); ctx.arc(x,y,p.radius,0,Math.PI*2); ctx.fillStyle=p.color; ctx.fill();
+  });
+  requestAnimationFrame(drawSolarSystem);
+}
+drawSolarSystem();
+</script>
+</body>
+</html>
